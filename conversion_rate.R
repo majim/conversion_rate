@@ -1,6 +1,11 @@
-# priceR includes access to a currency conversion 
-# convert local currencies to EURO using historical conversion rates
-# in this example, I convert a dataframe from different currencies into Euro based on historical EURO conversion rate in 2019
+rmarkdown::render("conversion_rate.R")
+
+#' ---
+#' title: "Currency conversion from historical data"
+#' author: "Angeles Jimenez"
+#' date: "22 01 2022"
+#' ---
+#'priceR includes access to a currency conversion API. Convert local currencies to EURO using historical conversion rates. In this example, I convert a dataframe from different currencies into Euro based on historical EURO conversion rate in 2019
 
 library(priceR)
 library(tidyverse)
@@ -26,16 +31,7 @@ conversions = sapply(unique(df$currency),avg_ex) %>% data.frame() %>% rownames_t
 df <- df %>% left_join(conversions,by='currency') %>%
     mutate(price_euro = price*conv)
 
+#+ fig.width=5, fig.height=5
+print(df)
 
-#https://www.youtube.com/watch?v=kL6L2MNqPHg
-#https://happygitwithr.com/index.html
-#connection to git
-library(usethis)
-use_git()
-# add my credentials
-edit_git_config()
-#create a repository from existing project
-use_git()
-#access token
-edit_r_environ()
-use_github(protocol = 'https', gh_token())
+
